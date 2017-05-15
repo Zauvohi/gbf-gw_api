@@ -1,7 +1,8 @@
 class RankingSerializer
-  def initialize(player_data)
+  def initialize(player_data, collection)
     @player_data = player_data
     @player_info = player_data.last
+    @collection = collection
     @total_battles = 0
   end
 
@@ -20,7 +21,7 @@ class RankingSerializer
   private
 
   def final_position
-    last_day = @player_data[6]
+    last_day = @collection ? @player_data[6] : @player_data[0]
     last_day.nil? ? nil : last_day.position
   end
 
@@ -32,7 +33,7 @@ class RankingSerializer
         rankings << 0
       else
         rankings << @player_data[i].points
-        @total_battles += @player_data[i].total_battles
+        @total_battles = @player_data[i].total_battles
       end
     end
     rankings
