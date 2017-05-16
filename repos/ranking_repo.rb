@@ -19,6 +19,7 @@ class RankingRepo < ROM::Repository[:rankings]
   end
 
   def by_id_and_day(id, edition, day)
-    [rankings.where(player_id: id, edition: edition, day: day).first]
+    data = rankings.where(player_id: id, edition: edition, day: day).first
+    data.nil? ? nil : [data]
   end
 end

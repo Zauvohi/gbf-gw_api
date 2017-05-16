@@ -8,4 +8,7 @@ helpers do
     RankingRepo.new(container)
   end
 
+  def halt_if_not_found(obj)
+    halt(404, { message: 'No found' }.to_json) if (obj.nil? || obj.empty?)
+  end
 end
