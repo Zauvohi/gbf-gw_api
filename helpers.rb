@@ -1,6 +1,4 @@
-require 'dotenv'
 require_relative './repos/ranking_repo'
-Dotenv.load
 
 helpers do
   def ranking_repo
