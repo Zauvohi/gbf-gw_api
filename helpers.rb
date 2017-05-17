@@ -2,7 +2,7 @@ require_relative './repos/ranking_repo'
 
 helpers do
   def ranking_repo
-    container = ROM.container(:sql, "#{ENV['DB_CONN']}", username: ENV['DB_USER'], password: ENV['DB_PASS'])
+    container = ROM.container(:sql, "#{ENV['DB_CONN']}", username: "#{ENV['DB_USER']}", password: "#{ENV['DB_PASS']}")
     RankingRepo.new(container)
   end
 
