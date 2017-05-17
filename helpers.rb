@@ -4,7 +4,7 @@ Dotenv.load
 
 helpers do
   def ranking_repo
-    container = ROM.container(:sql, "#{ENV['DB_CONN']}" + '/gw_rankings')
+    container = ROM.container(:sql, "#{ENV['DB_CONN']}", username: ENV['DB_USER'], password: ENV['DB_PASS'])
     RankingRepo.new(container)
   end
 

@@ -7,6 +7,7 @@ require_relative './serializers/ranking_serializer'
 # Endpoints
 before do
   content_type 'application/json', charset: 'utf-8'
+  # headers 'Access-Control-Allow-Origin' => '*'
 end
 
 get '/' do
@@ -21,7 +22,7 @@ get '/rankings/:edition/global/:id' do
 end
 
 get '/rankings/:edition/global/names/:name' do
-  players = ranking_repo.by_name(params[:name].to_i, params[:edition].to_i)
+  players = ranking_repo.by_name(params[:name], params[:edition].to_i)
   halt_if_not_found(players)
   data = []
   players.each do |player|
