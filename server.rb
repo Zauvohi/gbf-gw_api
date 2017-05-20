@@ -3,6 +3,7 @@ require 'rom'
 require 'rom-sql'
 require_relative 'helpers'
 require_relative './serializers/ranking_serializer'
+require_relative './serializers/cutoffs_serializer'
 
 # Endpoints
 before do
@@ -37,4 +38,10 @@ get '/rankings/:edition/:day/:id' do
   halt_if_not_found(player)
   data = RankingSerializer.new(player, false).as_json
   data.to_json
+end
+
+get '/cutoffs/newest' do
+  cutoffs = CutoffsSerializer.new(cutoffs_repo.most_recent).as_json
+  halt_if_not_found(cutoffs)
+  cutoffs.to_json
 end
