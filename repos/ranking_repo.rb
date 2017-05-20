@@ -1,8 +1,6 @@
 require 'rom-repository'
 
 class RankingRepo < ROM::Repository[:rankings]
-  commands :create
-
   def by_id(id, edition)
     rankings.where(player_id: id, edition: edition).to_a
   end
