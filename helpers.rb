@@ -1,8 +1,5 @@
 require_relative './repos/ranking_repo'
 require_relative './repos/cutoffs_repo'
-require 'dotenv'
-
-Dotenv.load
 
 helpers do
   def create_container
