@@ -34,7 +34,8 @@ get '/rankings/:edition/global/names/:name' do
 end
 
 get '/rankings/:edition/:day/:id' do
-  player = ranking_repo.by_id_and_day(params[:id].to_i, params[:edition].to_i, params[:day])
+  day = parse_day(params[:day])
+  player = ranking_repo.by_id_and_day(params[:id].to_i, params[:edition].to_i, day)
   halt_if_not_found(player)
   data = RankingSerializer.new(player, false).as_json
   data.to_json
