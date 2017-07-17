@@ -11,18 +11,16 @@ helpers do
     )
   end
 
-  def ranking_repo
-    container = create_container
+  def ranking_repo(container)
     RankingRepo.new(container)
   end
 
-  def cutoffs_repo
-    container = create_container
+  def cutoffs_repo(container)
     CutoffsRepo.new(container)
   end
 
   def halt_if_not_found(obj)
-    halt(404, { message: 'No found' }.to_json) if (obj.nil? || obj.empty?)
+    halt(404, { message: 'Not found' }.to_json) if (obj.nil? || obj.empty?)
   end
 
   def parse_day(day)
