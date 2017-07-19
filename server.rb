@@ -24,18 +24,18 @@ get '/rankings/:edition/global/:id' do
   data.to_json
 end
 
-get '/rankings/:edition/global/names/:name' do
-  players = ranking_repo(rom).by_name(params[:name], params[:edition].to_i)
-  halt_if_not_found(players)
-  data = []
-  players.each do |player|
-    json = RankingSerializer.new(player, true).as_json
-    data.push(json)
-  end
-  data.to_json
-end
+# get '/rankings/:edition/global/names/:name' do
+#   players = ranking_repo(rom).by_name(params[:name], params[:edition].to_i)
+#   halt_if_not_found(players)
+#   data = []
+#   players.each do |player|
+#     json = RankingSerializer.new(player, true).as_json
+#     data.push(json)
+#   end
+#   data.to_json
+# end
 
-get '/rankings/:edition/:day/:id' do
+get '/rankings/:edition/:id' do
   day = parse_day(params[:day])
   player = ranking_repo(rom).by_id_and_day(params[:id].to_i, params[:edition].to_i, day)
   halt_if_not_found(player)
