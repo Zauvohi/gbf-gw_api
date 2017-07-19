@@ -22,11 +22,4 @@ helpers do
   def halt_if_not_found(obj)
     halt(404, { message: 'Not found' }.to_json) if (obj.nil? || obj.empty?)
   end
-
-  def parse_day(day)
-    if (day.to_i != 0)
-      day = "day_#{day}"
-    end
-    day
-  end
 end
