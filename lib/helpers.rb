@@ -1,5 +1,5 @@
-require_relative './repos/ranking_repo'
-require_relative './repos/cutoffs_repo'
+require_relative './lib/repositories/ranking_repository'
+require_relative './lib/repositories/cutoffs_repository'
 
 helpers do
   def create_container
@@ -12,11 +12,11 @@ helpers do
   end
 
   def ranking_repo(container)
-    RankingRepo.new(container)
+    RankingRepository.new(container)
   end
 
   def cutoffs_repo(container)
-    CutoffsRepo.new(container)
+    CutoffsRepository.new(container)
   end
 
   def halt_if_not_found(obj)

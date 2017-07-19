@@ -1,9 +1,9 @@
 require 'sinatra'
 require 'rom'
 require 'rom-sql'
-require_relative 'helpers'
-require_relative './serializers/ranking_serializer'
-require_relative './serializers/cutoffs_serializer'
+require_relative './lib/helpers'
+require_relative './lib/serializers/ranking_serializer'
+require_relative './lib/serializers/cutoffs_serializer'
 
 rom = create_container
 
