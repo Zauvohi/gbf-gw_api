@@ -64,7 +64,7 @@ get '/editions' do
   halt_if_not_found(editions)
   editions_list = []
   editions.each do |edition|
-    editions_list << RankingSerializer.new(edition).to_h
+    editions_list << EditionSerializer.new(edition).to_h
   end
   editions_list.to_json
 end

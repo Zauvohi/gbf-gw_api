@@ -1,5 +1,6 @@
 require_relative './repositories/ranking_repository'
 require_relative './repositories/cutoffs_repository'
+require_relative './repositories/edition_repository'
 
 helpers do
   def ranking_repo(container)
