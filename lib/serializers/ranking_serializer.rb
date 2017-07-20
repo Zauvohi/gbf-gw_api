@@ -3,7 +3,7 @@ class RankingSerializer
     @data = data
   end
 
-  def as_json
+  def to_h
     {
       name: @data.player.name,
       id: @data.player.id,
@@ -11,6 +11,10 @@ class RankingSerializer
       position: @data.position,
       points: @data.points,
       total_battles: @data.total_battles
-    }.to_json
+    }
+  end
+
+  def as_json
+    self.to_h.to_json
   end
 end
