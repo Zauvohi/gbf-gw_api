@@ -6,8 +6,6 @@ require_relative './lib/serializers/ranking_serializer'
 require_relative './lib/serializers/ranking_list_serializer'
 require_relative './lib/serializers/cutoffs_serializer'
 require_relative './lib/serializers/edition_serializer'
-require 'dotenv'
-Dotenv.load
 
 rom = ROM.container(
   :sql,
