@@ -3,10 +3,18 @@ require 'rom'
 require 'rom-sql'
 require_relative './lib/helpers'
 require_relative './lib/serializers/ranking_serializer'
+require_relative './lib/serializers/ranking_list_serializer'
 require_relative './lib/serializers/cutoffs_serializer'
 require_relative './lib/serializers/edition_serializer'
+require 'dotenv'
+Dotenv.load
 
-rom = create_container
+rom = ROM.container(
+  :sql,
+  "#{ENV['DB_CONN']}",
+  username: "#{ENV['DB_USER']}",
+  password: "#{ENV['DB_PASS']}"
+)
 
 # Endpoints
 before do
@@ -21,7 +29,7 @@ end
 get '/rankings/list/:edition/:id' do
   id = params[:id].to_i
   edition = params[:edition].to_i
-  data = ranking_repository(rom).list_by_id(player_id: id, edition_id: edition)
+  data = ranking_repo(rom).list_by_id(player_id: id, edition_id: edition)
   halt_if_not_found(data)
   RankingListSerializer.new(data, :day).as_json
 end
