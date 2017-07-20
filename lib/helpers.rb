@@ -1,5 +1,5 @@
-require_relative './lib/repositories/ranking_repository'
-require_relative './lib/repositories/cutoffs_repository'
+require_relative './repositories/ranking_repository'
+require_relative './repositories/cutoffs_repository'
 
 helpers do
   def create_container

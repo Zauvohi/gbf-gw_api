@@ -1,7 +1,20 @@
 require 'rom-repository'
+require 'pry'
 
 class RankingRepository < ROM::Repository[:rankings]
-  def by_id(id, edition)
+  relations :players
+
+  def by_id(**args)
+    rankings.where(
+      player_id: args[:player_id],
+      edition_id: args[:edition_id],
+      day: args[:day]
+    ).wrap(
+      player: [players, id: args[:player_id]]
+    ).one
+  end
+
+  def full_by_id(id, edition)
     rankings.where(player_id: id, edition: edition).to_a
   end
 
