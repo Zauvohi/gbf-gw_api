@@ -51,11 +51,11 @@ get '/rankings/:edition/:id' do
 end
 
 get '/editions/:number' do
-  # get an edition by its number
+  edition_repo(rom).by_number(params[:number].to_i).to_json
 end
 
 get '/editions' do
-  # get a list of all editions
+  edition_repo(rom).all
 end
 
 get '/cutoffs/newest' do

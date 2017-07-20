@@ -19,6 +19,10 @@ helpers do
     CutoffsRepository.new(container)
   end
 
+  def edition_repo(container)
+    EditionRepository.new(container)
+  end
+
   def halt_if_not_found(obj)
     halt(404, { message: 'Not found' }.to_json) if (obj.nil? || obj.empty?)
   end
