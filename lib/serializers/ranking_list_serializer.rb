@@ -21,13 +21,33 @@ class RankingListSerializer
   private
 
   def rankings_list
+    if @key == :day
+      list_by_day
+    else
+      list_by_edition
+    end
+  end
+
+  def ranking_data(ranking)
+    {
+      position: ranking.position,
+      points: ranking.points,
+      total_battles: ranking.total_battles
+    }
+  end
+
+  def list_by_day
     data = {}
     @data.each do |ranking|
-      data[ranking[@key]] = {
-        position: ranking.position,
-        points: ranking.points,
-        total_battles: ranking.total_battles
-      }
+      data[ranking[@key]] = ranking_data(ranking)
+    end
+    data
+  end
+
+  def list_by_edition
+    data = {}
+    @data.each do |ranking|
+      data[ranking.edition[@key]] = ranking_data(ranking)
     end
     data
   end
