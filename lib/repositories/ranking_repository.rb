@@ -2,7 +2,7 @@ require 'rom-repository'
 require 'pry'
 
 class RankingRepository < ROM::Repository[:rankings]
-  relations :players
+  relations :players, :editions
 
   def by_id(**args)
     rankings.where(
@@ -19,6 +19,18 @@ class RankingRepository < ROM::Repository[:rankings]
       player_id: player_id,
       edition_id: edition_id
     ).order { day.asc }
+    .wrap(
+      player: [players, id: player_id]
+    ).to_a
+  end
+
+  def global_by_id(player_id:)
+    rankings.where(
+      player_id: player_id,
+      day: 5
+    ).wrap_parent(
+      edition: editions
+    ).order { edition_id.asc }
     .wrap(
       player: [players, id: player_id]
     ).to_a
