@@ -23,7 +23,7 @@ get '/rankings/list/:edition/:id' do
   edition = params[:edition].to_i
   data = ranking_repository(rom).list_by_id(player_id: id, edition_id: edition)
   halt_if_not_found(data)
-  RankingListSerializer.new(data).as_json
+  RankingListSerializer.new(data, :day).as_json
 end
 
 get '/rankings/global/:id' do
