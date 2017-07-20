@@ -27,7 +27,10 @@ get '/rankings/list/:edition/:id' do
 end
 
 get '/rankings/global/:id' do
-  # gets all the last standings (day 5) from a player
+  id = params[:id].to_i
+  data = ranking_repo(rom).global_by_id(player_id: id)
+  halt_if_not_found(data)
+  RankingListSerializer.new(data, :number).as_json
 end
 
 # optional query params: day (integer, from 0 to 5)
