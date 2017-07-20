@@ -43,7 +43,7 @@ get '/rankings/:edition/:id' do
   id = params[:id].to_i
   edition = params[:edition].to_i
   player = ranking_repo(rom).by_id(player_id: id, edition_id: edition, day: day)
-  halt_if_not_found()
+  halt_if_not_found(player)
   RankingSerializer.new(player).as_json
 end
 
