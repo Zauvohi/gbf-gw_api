@@ -50,6 +50,14 @@ get '/rankings/:edition/:id' do
   RankingSerializer.new(player).as_json
 end
 
+get '/editions/:number' do
+  # get an edition by its number
+end
+
+get '/editions' do
+  # get a list of all editions
+end
+
 get '/cutoffs/newest' do
   cutoffs = CutoffsSerializer.new(cutoffs_repo(rom).most_recent).as_json
   halt_if_not_found(cutoffs)
