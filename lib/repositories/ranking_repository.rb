@@ -18,7 +18,10 @@ class RankingRepository < ROM::Repository[:rankings]
     rankings.where(
       player_id: player_id,
       edition_id: edition_id
-    ).order { day.asc }.to_a
+    ).order { day.asc }
+    .wrap(
+      player: [players, id: player_id]
+    ).to_a
   end
 
   def full_by_id(id, edition)
