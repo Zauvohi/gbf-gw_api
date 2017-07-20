@@ -4,6 +4,7 @@ require 'rom-sql'
 require_relative './lib/helpers'
 require_relative './lib/serializers/ranking_serializer'
 require_relative './lib/serializers/cutoffs_serializer'
+require_relative './lib/serializers/edition_serializer'
 
 rom = create_container
 
@@ -51,11 +52,19 @@ get '/rankings/:edition/:id' do
 end
 
 get '/editions/:number' do
-  edition_repo(rom).by_number(params[:number].to_i).to_json
+  edition = edition_repo(rom).by_number(params[:number].to_i)
+  halt_if_not_found(edition)
+  EditionSerializer.new(edition).as_json
 end
 
 get '/editions' do
-  edition_repo(rom).all
+  editions = edition_repo(rom).all
+  halt_if_not_found(editions)
+  editions_list = []
+  editions.each do |edition|
+    editions_list << RankingSerializer.new(edition).to_h
+  end
+  editions_list.to_json
 end
 
 get '/cutoffs/newest' do
