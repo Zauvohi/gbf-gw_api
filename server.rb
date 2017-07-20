@@ -35,16 +35,15 @@ end
 
 # optional query params: day (integer, from 0 to 5)
 get '/rankings/:edition/:id' do
-  data = {}
   if params[:day].nil?
-    data[:day] = 5
+    day = 5
   else
-    data[:day] = params[:day].to_i
+    day = params[:day].to_i
   end
-  data[:player_id] = params[:id].to_i
-  data[:edition_id] = params[:edition].to_i
-  player = ranking_repo(rom).by_id(data)
-  halt_if_not_found(player)
+  id = params[:id].to_i
+  edition = params[:edition].to_i
+  player = ranking_repo(rom).by_id(player_id: id, edition_id: edition, day: day)
+  halt_if_not_found()
   RankingSerializer.new(player).as_json
 end
 

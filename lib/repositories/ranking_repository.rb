@@ -3,13 +3,13 @@ require 'rom-repository'
 class RankingRepository < ROM::Repository[:rankings]
   relations :players, :editions
 
-  def by_id(**args)
+  def by_id(player_id:, edition_id:, day:)
     rankings.where(
-      player_id: args[:player_id],
-      edition_id: args[:edition_id],
-      day: args[:day]
+      player_id: player_id,
+      edition_id: edition_id,
+      day: day
     ).wrap(
-      player: [players, id: args[:player_id]]
+      player: [players, id: player_id]
     ).one
   end
 
